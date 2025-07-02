@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fract-ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 18:05:57 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/02 18:26:37 by megiazar         ###   ########.fr       */
+/*   Created: 2025/07/02 18:26:58 by megiazar          #+#    #+#             */
+/*   Updated: 2025/07/02 18:34:13 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FRACTOL-H
+# define FRACTOL-H 
 
-// have 2 prompts: fractol mandelbrot or fractol julia <real;imagery>
-// the main func is a TL,DR of your application
+# include <stdio.h>
+# include <stdlib.h> 
+# include <unistd.h>
+# include <math.h>
+# include "lib/minilibx-linux/mlx.h"
 
-int main(int ac, char *av[])
-{
-	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot", 10)
-		|| ac == 4 && !ft_strcmp(av[1], "julia", 5))
-	// prompt correct, ko the applicarion
-	{
+#define ERROR_MESSAGE "Bro enter \n\t\"./fractol mandelbrot\" or \n\t\"./fractol julia <value_1;value2>\"
 
-	}
-	else 
-	{
-		putstr_fd(ERROR_MESSAGE, STDERRR_FILENO);
-		exit(EXIT_FAILURE)
-	}
-}
+
+
+
+#endif
