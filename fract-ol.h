@@ -6,12 +6,12 @@
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:26:58 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/02 18:34:13 by megiazar         ###   ########.fr       */
+/*   Updated: 2025/07/02 21:24:38 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL-H
-# define FRACTOL-H 
+#ifndef FRACTOL_H
+# define FRACTOL_H 
 
 # include <stdio.h>
 # include <stdlib.h> 
@@ -24,4 +24,4 @@
 
 
 
-#endif
+#endif */

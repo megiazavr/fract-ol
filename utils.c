@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 18:05:57 by megiazar          #+#    #+#             */
+/*   Created: 2025/07/02 19:20:56 by megiazar          #+#    #+#             */
 /*   Updated: 2025/07/02 21:23:28 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include <stdio.h>
+#include "fract-ol.h"
 
-// have 2 prompts: fractol mandelbrot or fractol julia <real;imagery>
-// the main func is a TL,DR of your application
-
-int main(int ac, char *av[])
+int ft_strncmp(char *s1, char *s2, int n)
 {
-	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot", 10)
-		|| ac == 4 && !ft_strcmp(av[1], "julia", 5))
-	// prompt correct, ko the applicarion
+	if (NULL == s1 || NULL == s2 || n <= 0)
+		return (0);
+	while (*s1 == *s2 && n > 0 && *s1 != '\0')
 	{
-
+		++s1;
+		++s2;
+		--n;
 	}
-	else 
+	return (*s1 - *s2);
+}
+
+void putstr_fd(char *s, int fd)
+{
+	if (NULL == s || fd < 0)
+		return ;
+	if (*s != '\0')
 	{
-		putstr_fd(ERROR_MESSAGE, STDERRR_FILENO);
-		exit(EXIT_FAILURE)
+		
 	}
 } */

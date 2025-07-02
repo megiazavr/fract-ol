@@ -6,12 +6,11 @@
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:00:52 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/02 18:43:57 by megiazar         ###   ########.fr       */
+/*   Updated: 2025/07/02 21:25:36 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "fract-ol.h"
 
 typedef struct s_complex
 {
@@ -34,8 +33,8 @@ int main()
 	z.real = 0;
 	z.imagery = 0;
 
-	point.real = 0.25;
-	point.imagery = 0.4;
+	point.real = 5;
+	point.imagery = 2;
 
 	while (i < 42)
 	{
