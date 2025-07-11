@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract-ol.h                                         :+:      :+:    :+:   */
+/*   structure.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 18:26:58 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/02 21:24:38 by megiazar         ###   ########.fr       */
+/*   Created: 2025/07/11 19:20:21 by megiazar          #+#    #+#             */
+/*   Updated: 2025/07/11 19:20:59 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H 
-
-# include <stdio.h>
-# include <stdlib.h> 
-# include <unistd.h>
-# include <math.h>
-# include "lib/minilibx-linux/mlx.h"
-
-#define ERROR_MESSAGE "Bro enter \n\t\"./fractol mandelbrot\" or \n\t\"./fractol julia <value_1;value2>\"
-
-
-
-
-#endif */
+int	is_valid_args(int argc, char **argv)
+{
+	if (argc < 2)
+		return (0);
+	if (!ft_strncmp(argv[1], "mandelbrot", 10))
+		return (1);
+	if (!ft_strncmp(argv[1], "julia", 5) && argc == 4)
+		return (1);
+	return (0);
+}
