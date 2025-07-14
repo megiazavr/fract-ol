@@ -6,20 +6,11 @@
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:21:09 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/11 19:25:39 by megiazar         ###   ########.fr       */
+/*   Updated: 2025/07/14 14:44:22 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	render(t_vars *vars)
-{
-	if (vars->fractal_type == 0)
-		draw_mandelbrot(vars);
-	else if (vars->fractal_type == 1)
-		draw_julia(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-}
 
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
@@ -38,4 +29,13 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 
 	render(vars);
 	return (0);
+}
+
+void	render(t_vars *vars)
+{
+	if (vars->fractal_type == 0)
+		draw_mandelbrot(vars);
+	else if (vars->fractal_type == 1)
+		draw_julia(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }
