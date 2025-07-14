@@ -13,16 +13,6 @@
 #include "fractol.h"
 #include <mlx.h>
 
-// bites are not aligned, line_lenght differs from the actual window width.
-//we should always calculate the memory offset using the line len set by mlx_get_data_addr
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel) / 8);
-	*(unsigned int*)dst = color;
-}
-
 void	draw_julia(t_vars *vars)
 {
 	int		x, y, i;
@@ -33,23 +23,22 @@ void	draw_julia(t_vars *vars)
 
 	// fixed c for Julia set
 	// the julia constant c = a + bi is hardcoded(not passed from a command line)
-	c.real = -0.88;
-	c.imagery = 0;
+	c = vars->julia_c;
 
 	y = 0;
-	while (y < 1080)
+	while (y < 800)
 	{
 		y++;
 		x = 0;
-		while (x < 1920)
+		while (x < 600)
 		{
 			x++;
 			// мапим координаты пикселя в комплексную плоскость
-			z.real = (x - 960) / 400.0;
-			z.imagery = (y - 540) / 400.0;
+			z.real = (x - 300) / vars->zoom + vars->move_x;
+			z.imagery = (y - 400) / vars->zoom + vars->move_y;
 
 			i = 0;
-			while (i < 500)
+			while (i < 100)
 			{
 				tmp = z.real * z.real - z.imagery * z.imagery;
 				z.imagery = 2 * z.real * z.imagery + c.imagery;
@@ -63,13 +52,37 @@ void	draw_julia(t_vars *vars)
 			int b = (i * 13) % 256;
 			color = (r << 16) | (g << 8) | b;
 
-			//color = (i == 500) ? 0x050000 : 0xFF0000 * i / 100;
-			my_mlx_pixel_put(img, x, y, color);
+			my_mlx_pixel_put(&vars->img, x, y, color);
 		}
+		y++;
 	}
 }
 
-int	main(void)
+/* int	main(void)
+{
+	t_vars vars;
+
+	vars.zoom = 250.0;
+	vars.move_x = 0.0;
+	vars.move_y = 0.0;
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Meow");
+	
+// bpp - bits per pixel
+// creating an image
+	vars.img.img = mlx_new_image(vars.mlx, 1920, 1080);
+	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_lenght, &vars.img.endian);
+	
+	draw_julia(&vars);
+// put image in a window
+	//my_mlx_pixel_put(&img, 5, 5, 0x050000);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mlx_loop(vars.mlx);
+} */
+
+/* int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -83,10 +96,10 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
 	
-	draw_julia(&img);
+	draw_julia(&vars);
 // put image in a window
 	my_mlx_pixel_put(&img, 5, 5, 0x050000);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
-}
+} */
 
