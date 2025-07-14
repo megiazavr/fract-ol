@@ -6,15 +6,11 @@
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:05:57 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/11 19:30:24 by megiazar         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:33:26 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-
-// have 2 prompts: fractol mandelbrot or fractol julia <real;imagery>
-// the main func is a TL,DR of your application
-
 #include "fractol.h"
 
 void	show_error_and_exit(void)
@@ -31,7 +27,7 @@ int	main(int argc, char **argv)
 		show_error_and_exit();
 
 	// базовые параметры
-	vars.zoom = 400.0;
+	vars.zoom = 250.0;
 	vars.move_x = 0.0;
 	vars.move_y = 0.0;
 
