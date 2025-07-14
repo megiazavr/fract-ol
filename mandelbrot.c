@@ -6,24 +6,14 @@
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:53:06 by megiazar          #+#    #+#             */
-/*   Updated: 2025/07/11 18:05:11 by megiazar         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:39:50 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <mlx.h>
 
-// bites are not aligned, line_lenght differs from the actual window width.
-//we should always calculate the memory offset using the line len set by mlx_get_data_addr
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel) / 8);
-	*(unsigned int*)dst = color;
-}
-
-void	draw_mandelbrot(t_data *img)
+void	draw_mandelbrot(t_vars *vars)
 {
 	int		x, y, i;
 	t_complex	z;
@@ -39,14 +29,14 @@ void	draw_mandelbrot(t_data *img)
 		{
 			x++;
 			// map pixel to c
-			c.real = (x - 960) / 250.0;
-			c.imagery = (y - 540) / 250.0;
+			c.real = (x - 960) / vars->zoom + vars->move_x;
+			c.imagery = (y - 540) / vars->zoom + vars->move_y;
 
 			// z styart at 0
 			z.real = 0;
 			z.imagery = 0;
 			i = 0;
-			while (i < 500)
+			while (i < 100)
 			{
 				tmp = z.real * z.real - z.imagery * z.imagery;
 				z.imagery = 2 * z.real * z.imagery + c.imagery;
@@ -61,28 +51,32 @@ void	draw_mandelbrot(t_data *img)
 			color = (r << 16) | (g << 8) | b;
 
 		//	color = 0xFF0000 * i / 100;
-			my_mlx_pixel_put(img, x, y, color);
+			my_mlx_pixel_put(&vars->img, x, y, color);
 		}
+		y++;
 	}
 }
 
-int	main(void)
+/* int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data		img;
+	t_vars vars;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Meow");
+	vars.zoom = 250.0;
+	vars.move_x = 0.0;
+	vars.move_y = 0.0;
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Meow");
 	
 // bpp - bits per pixel
 // creating an image
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
+	vars.img.img = mlx_new_image(vars.mlx, 1920, 1080);
+	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_lenght, &vars.img.endian);
 	
-	draw_mandelbrot(&img);
+	draw_mandelbrot(&vars);
 // put image in a window
-	my_mlx_pixel_put(&img, 5, 5, 0x050000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-}
+	//my_mlx_pixel_put(&img, 5, 5, 0x050000);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mlx_loop(vars.mlx);
+} */
